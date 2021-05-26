@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Emotion recognition experiments",
   "main": "./emotions.coffee",
+  "scripts": {
+    "start": "node --enable-source-maps ./bin/backend.js",
+    "build": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/ilyabo/aiddata.git"
