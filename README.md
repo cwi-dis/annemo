@@ -9,6 +9,10 @@ This is a complete rewrite of the original application using Typescript and
 React. Moreover the application can now be run inside a Docker container and
 with modern versions of Node.js.
 
+Before starting the application, make sure to copy or rename the file
+`config.json.sample` to `config.json` and fill in your desired values. The
+application will refuse to start if there is not `config.json` present.
+
 To start the application in a production environment, invoke the following
 command:
 
