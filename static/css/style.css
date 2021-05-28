@@ -52,3 +52,7 @@ div.formelem { padding:10px;}
 }
 
 #saveBut { font-size:1.5em; margin-top:20px; }
+
+.is-bold {
+  font-weight: bold;
+}

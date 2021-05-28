@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
+import classNames from "classnames";
+
 import { RouterParams } from "./app";
 
 function capitalize(word: string) {
@@ -14,7 +16,9 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
+  const location = useLocation();
   const { subject } = useParams<RouterParams>();
+
   const [ videos, setVideos ] = useState<Array<string>>([]);
 
   useEffect(() => {
@@ -34,7 +38,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           const videoLinks = ["arousal", "valence"].map((dim, j) => {
             return (
               <li key={`${i}.${j}`}>
-                <Link to={`/user/${subject}/video/${v}/${dim}`}>
+                <Link
+                  to={`/user/${subject}/video/${v}/${dim}`}
+                  className={classNames({ "is-bold": location.pathname == `/user/${subject}/video/${v}/${dim}`})}
+                >
                   {capitalize(dim)} - {v}
                 </Link>
               </li>
@@ -43,7 +50,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
           return videoLinks.concat(
             <li key={`social.${i}`}>
-              <Link to={`/user/${subject}/social/${v}`}>
+              <Link
+                to={`/user/${subject}/social/${v}`}
+                className={classNames({ "is-bold": location.pathname == `/user/${subject}/social/${v}`})}
+              >
                 Social dimension annotation
               </Link>
             </li>
