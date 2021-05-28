@@ -24,13 +24,18 @@ const Video: React.FC<VideoProps> = (props) => {
 
       <div style={{ display: "flex", justifyContent: "center" }}>
         {(location) && (
-          <video
-            src={`${location}/${video}`}
-            width="800"
-            height="600"
-            preload="auto"
-            controls
-          />
+          <div>
+            <video
+              src={`${location}/${video}`}
+              width="800"
+              height="600"
+              preload="auto"
+              controls
+            />
+
+            <br/>
+            <input type="range" style={{ width: 800 }} />
+          </div>
         )}
       </div>
     </div>
