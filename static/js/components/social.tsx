@@ -1,5 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+
+import { RouterParams } from "./app";
 
 interface Dimensions {
   Agreement: number;
@@ -13,6 +16,8 @@ interface SocialProps {
 }
 
 const Social: React.FC<SocialProps> = (props) => {
+  const { subject } = useParams<RouterParams>();
+
   const [ isSaved, setIsSaved ] = useState(false);
   const [ dimensions, setDimensions ] = useState<Dimensions>({
     "Agreement": 0,
@@ -27,6 +32,23 @@ const Social: React.FC<SocialProps> = (props) => {
       ...dimensions,
       [dimension]: value
     });
+  };
+
+  const saveData = async () => {
+    try {
+      await fetch("/social", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          data: dimensions,
+          subject
+        })
+      });
+
+      setIsSaved(true);
+    } catch {
+      prompt("Could not save data");
+    }
   };
 
   return (
@@ -62,12 +84,14 @@ const Social: React.FC<SocialProps> = (props) => {
                 );
               })}
 
-              <button className="button is-info mt-4">
+              <button className="button is-info mt-4" onClick={saveData}>
                 Save
               </button>
             </>
           ) : (
-            <p>Thanks! Please proceed to the next video.</p>
+            <h5 className="title is-5 mt-4" style={{ textAlign: "center"}}>
+              Thanks! Please proceed to the next video.
+            </h5>
           )}
 
         </div>
