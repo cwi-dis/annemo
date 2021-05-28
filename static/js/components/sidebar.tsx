@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { RouterParams } from "./app";
 
 function capitalize(word: string) {
   const firstLetter = word.slice(0, 1);
@@ -13,7 +14,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
-  const { subject } = useParams<{ subject: string }>();
+  const { subject } = useParams<RouterParams>();
   const [ videos, setVideos ] = useState<Array<string>>([]);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
   return (
     <div style={{ width: "25%" }}>
-      <h3 className="title is-3">Videos</h3>
+      <h4 className="title is-4">Videos</h4>
 
       <ul>
         {videos.map((v) => {

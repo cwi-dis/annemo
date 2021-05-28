@@ -5,6 +5,12 @@ import Sidebar from "./sidebar";
 import Social from "./social";
 import Video from "./video";
 
+export interface RouterParams {
+  subject: string;
+  video: string;
+  dimension: string;
+}
+
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
