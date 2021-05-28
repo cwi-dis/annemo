@@ -30,10 +30,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
       <h4 className="title is-4">Videos</h4>
 
       <ul>
-        {videos.map((v) => {
-          const videoLinks = ["arousal", "valence"].map((dim) => {
+        {videos.map((v, i) => {
+          const videoLinks = ["arousal", "valence"].map((dim, j) => {
             return (
-              <li>
+              <li key={`${i}.${j}`}>
                 <Link to={`/user/${subject}/video/${v}/${dim}`}>
                   {capitalize(dim)} - {v}
                 </Link>
@@ -42,13 +42,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           });
 
           return videoLinks.concat(
-            <li>
+            <li key={`social.${i}`}>
               <Link to={`/user/${subject}/social/${v}`}>
                 Social dimension annotation
               </Link>
             </li>
           ).concat(
-            <li>
+            <li key={`divider.${i}`}>
               <hr/>
             </li>
           );
