@@ -4,7 +4,11 @@ import fs from "fs";
 import logger from "morgan";
 import dateFormat from "dateformat";
 
-import config from "./config.json";
+interface Config {
+  location: string;
+  videos: Array<string>;
+  users: Array<string>;
+}
 
 function escapeQuotes(s: any) {
   if (typeof s == "string" && s.indexOf(",") >= 0) {
@@ -12,6 +16,18 @@ function escapeQuotes(s: any) {
   }
 
   return s;
+}
+
+async function loadConfig(): Promise<Config> {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path.join(__dirname, "config.json"), "utf-8", (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(JSON.parse(data));
+      }
+    })
+  });
 }
 
 async function saveToCSV(subject: string, line: string): Promise<void> {
