@@ -1,0 +1,11 @@
+version: "3.6"
+services:
+  web:
+    build: .
+    image: registry.dis.cwi.nl/annemo
+    restart: always
+    volumes:
+      - ./results:/code/results
+    ports:
+      - "3001:3001"
+    command: sh -c "/wait && yarn start"
