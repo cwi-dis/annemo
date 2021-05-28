@@ -11,13 +11,17 @@ const App: React.FC<AppProps> = () => {
   return (
     <Router>
       <div style={{ display: "flex" }}>
-        <Sidebar />
         <Switch>
-          <Route path="/video/:subject/:video/:dimension">
-            <Video />
-          </Route>
-          <Route path="/social/:subject/:video">
-            <Social />
+          <Route path="/user/:subject">
+            <Sidebar />
+            <Switch>
+              <Route path="/user/:subject/video/:video/:dimension">
+                <Video />
+              </Route>
+              <Route path="/user/:subject/social/:video">
+                <Social />
+              </Route>
+            </Switch>
           </Route>
           <Route path="/">
             <p>Page not found</p>
