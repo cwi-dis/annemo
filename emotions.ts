@@ -6,8 +6,8 @@ import dateFormat from "dateformat";
 
 import config from "./config.json";
 
-function escapeQuotes(s: string) {
-  if (s.indexOf(",") >= 0) {
+function escapeQuotes(s: any) {
+  if (typeof s == "string" && s.indexOf(",") >= 0) {
     return '"' + s.replace(/"/g, '\\"') + '"';
   }
 
@@ -46,6 +46,7 @@ app.set("port", port);
 app.use(express.static("static"))
 app.use(express.urlencoded({ extended: false }));
 app.use(logger("dev"));
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.render("index", {
