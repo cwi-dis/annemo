@@ -5,38 +5,24 @@ A simplistic web app for annotating emotions in human speech video recordings.
 
 ![annemo screenshot](https://github.com/ilyabo/annemo/raw/master/doc/screenshot.png)
 
+This is a complete rewrite of the original application using Typescript and
+React. Moreover the application can now be run inside a Docker container and
+with modern versions of Node.js.
 
-Installation and running
-======
-Install [Node.js 0.6.x](http://nodejs.org/dist/v0.6.16/docs/#)
+To start the application in a production environment, invoke the following
+command:
 
-Then, install CoffeeScript:
+    docker-compose -f docker-compose.prod.yml up
 
-    npm install -g coffee-script
+This will start the server on port 3001 on your machine and the results will
+become available in the local `results/` directory.
 
+For development, invoke the following command:
 
-To download the project dependencies in the project directory run: 
+    docker-compose up
 
-    npm install
-
-
-Then, configure the videos and the allowed user ids in [config.coffee](https://github.com/ilyabo/annemo/blob/master/config.coffee).
-
-
-To start the server run:
-
-    cake forever-start
-
-Then, open in your browser [http://localhost:3001/?subject=8935](http://localhost:3001/?subject=8935)
-where 8935 is one of the valid user ids specified in your [config.coffee](https://github.com/ilyabo/annemo/blob/master/config.coffee).
-
-The annotation results will be saved in CSV files in results/ directory.
-
-To restart the server:
-
-    cake forever-restart
-
-To stop:
-
-    cake forever-stop
- 
+Keep in mind, that in this case, the directories `bin/`, `views/` and `static/`
+are mounted inside the container from the local machine. This means, that you
+have to build frontend and backend bundles yourself by first running
+`yarn install` followed by `yarn build`, both in the root directory as well as
+the directory `static/`.
