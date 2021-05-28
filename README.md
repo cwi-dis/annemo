@@ -3,7 +3,7 @@ Annemo
 
 A simplistic web app for annotating emotions in human speech video recordings.
 
-![annemo screenshot](https://github.com/ilyabo/annemo/raw/master/doc/screenshot.png)
+![annemo screenshot](https://github.com/cwi-dis/annemo/raw/master/doc/screenshot.png)
 
 This is a complete rewrite of the original application using Typescript and
 React. Moreover the application can now be run inside a Docker container and
