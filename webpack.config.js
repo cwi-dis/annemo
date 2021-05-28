@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
 
 const backend = {
   mode: process.env.NODE_ENV || "development",
@@ -9,6 +10,7 @@ const backend = {
   entry: {
     backend: "./emotions.ts",
   },
+  externals: [nodeExternals()],
   output: {
     path: __dirname + "/bin",
     filename: "[name].js"
