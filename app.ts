@@ -20,6 +20,11 @@ function escapeQuotes(s: any) {
 
 async function loadConfig(): Promise<Config> {
   return new Promise((resolve, reject) => {
+    if (!fs.existsSync(path.join(__dirname, "config.json"))) {
+      reject("Config file not found");
+      return;
+    }
+
     fs.readFile(path.join(__dirname, "config.json"), "utf-8", (err, data) => {
       if (err) {
         reject(err);
