@@ -6,6 +6,7 @@ services:
     restart: always
     volumes:
       - ./results:/code/results
+      - ./config.json:/code/config.json
     ports:
       - "3001:3001"
     command: sh -c "/wait && yarn start"
