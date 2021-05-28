@@ -49,8 +49,6 @@ const Video: React.FC<VideoProps> = (props) => {
 
   return (
     <div style={{ width: "75%" }}>
-      <h4 className="title is-4">Video {dimension}</h4>
-
       <div style={{ display: "flex", justifyContent: "center" }}>
         {(location) && (
           <div>
@@ -63,8 +61,10 @@ const Video: React.FC<VideoProps> = (props) => {
               controls
             />
 
-            <br/>
-            <br/>
+            <h5 className="title is-5 mt-4" style={{ textAlign: "center" }}>
+              {dimension}
+            </h5>
+
             <input
               type="range"
               value={sliderValue}
@@ -74,6 +74,11 @@ const Video: React.FC<VideoProps> = (props) => {
               style={{ width: 800 }}
               onChange={onSliderChanged}
             />
+
+            <div style={{ display: "flex", justifyContent: "space-between"}}>
+              <p>{(dimension == "arousal") ? "very passive" : "very negative"}</p>
+              <p>{(dimension == "arousal") ? "very active" : "very positive"}</p>
+            </div>
           </div>
         )}
       </div>
