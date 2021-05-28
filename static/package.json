@@ -1,7 +1,7 @@
 {
-  "name": "annemo",
-  "version": "1.1.0",
-  "private": true,
+  "name": "Annemo",
+  "version": "1.0.0",
+  "license": "BSD-2-Clause",
   "scripts": {
     "build": "webpack"
   },

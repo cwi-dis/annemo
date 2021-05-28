@@ -1,15 +1,16 @@
 {
-  "name": "emotions",
-  "version": "0.0.1",
+  "name": "Annemo",
+  "version": "1.0.0",
   "description": "Emotion recognition experiments",
-  "main": "./emotions.coffee",
+  "main": "./app.ts",
+  "license": "BSD-2-Clause",
   "scripts": {
     "start": "node --enable-source-maps ./bin/backend.js",
     "build": "webpack"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/ilyabo/aiddata.git"
+    "url": "http://github.com/cwi-dis/annemo.git"
   },
   "dependencies": {
     "dateformat": "4.5.1",
