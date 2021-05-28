@@ -1,0 +1,12 @@
+{
+  "location": "http://some-base.url",
+  "videos": [
+    "video1.mp4"
+    "video2.mp4"
+    "video3.mp4"
+  ],
+  "users": [
+    "user1",
+    "user2"
+  ]
+}
