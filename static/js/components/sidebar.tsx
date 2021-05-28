@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   const [ videos, setVideos ] = useState<Array<string>>([]);
 
   useEffect(() => {
-    fetch("/videos").then((res) => {
+    fetch(`/videos?subject=${subject}`).then((res) => {
       return res.json();
     }).then((data) => {
       setVideos(data.videos);

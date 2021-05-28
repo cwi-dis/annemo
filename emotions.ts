@@ -55,13 +55,25 @@ app.get("/", (req, res) => {
 });
 
 app.get("/videos", (req, res) => {
-  res.send({
-    videos: config.videos
-  });
+  const { subject } = req.query;
+
+  if (config.users.find((u) => u == subject)) {
+    return res.send({
+      videos: config.videos
+    });
+  }
+
+  res.send({ videos: [] })
 });
 
 app.post("/emotion", async (req, res) => {
   const { subject, data } = req.body;
+
+  if (!config.users.find((u) => u == subject)) {
+    return res.status(400).send({
+      message: "No such user"
+    });
+  }
 
   const values = Object.values(data).map(escapeQuotes);
   const formattedDate = escapeQuotes(dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT"))
@@ -82,6 +94,12 @@ app.post("/emotion", async (req, res) => {
 
 app.post("/social", async (req, res) => {
   const { subject, data } = req.body;
+
+  if (!config.users.find((u) => u == subject)) {
+    return res.status(400).send({
+      message: "No such user"
+    });
+  }
 
   const values = Object.values(data).map(escapeQuotes);
 
