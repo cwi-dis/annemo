@@ -24,7 +24,11 @@ async function loadConfig(): Promise<Config> {
       if (err) {
         reject(err);
       } else {
-        resolve(JSON.parse(data));
+        try {
+          resolve(JSON.parse(data));
+        } catch (err) {
+          reject(err);
+        }
       }
     })
   });
