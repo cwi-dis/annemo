@@ -4,7 +4,7 @@ const frontend = {
   mode: process.env.NODE_ENV || "development",
   target: "web",
   entry: {
-    bundle: "./javascripts/main.ts"
+    bundle: "./js/main.ts"
   },
   output: {
     path: __dirname + "/dist",
@@ -20,16 +20,11 @@ const frontend = {
         test: /\.tsx?$/,
         use: "ts-loader"
       }, {
-        test: /\.s[ac]ss$/,
+        test: /\.css$/,
         use: [
           "style-loader",
-          "css-loader?url=false",
-          "sass-loader"
+          "css-loader"
         ]
-      },
-      {
-        test: /\.(png|jpg)$/,
-        loader: 'ignore-loader'
       }
     ]
   }

@@ -64,6 +64,7 @@ public/dist/
 backend.js*
 db/
 bin/
+dist/
 aws.json
 docs/
 .vscode/
