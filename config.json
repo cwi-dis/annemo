@@ -1,0 +1,5 @@
+{
+  "location": "http://hello.world",
+  "videos": ["video1.mp4", "video2.mp4"],
+  "users": []
+}

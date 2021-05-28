@@ -3,6 +3,8 @@ import path from "path";
 import fs from "fs";
 import logger from "morgan";
 
+import config from "./config.json";
+
 const app = express();
 const resultsDir = path.join(__dirname, "results");
 
@@ -23,6 +25,12 @@ app.use(logger("dev"));
 app.get("/", (req, res) => {
   res.render("index", {
     title: "Annemo"
+  });
+});
+
+app.get("/videos", (req, res) => {
+  res.send({
+    videos: config.videos
   });
 });
 

@@ -11,6 +11,7 @@
     "keyofStringsOnly": true,
     "noUnusedLocals": true,
     "baseUrl": ".",
+    "resolveJsonModule": true
   },
   "include": [
     "./**/*.ts"
