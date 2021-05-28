@@ -34,6 +34,12 @@ app.get("/videos", (req, res) => {
   });
 });
 
+app.get("/location", (req, res) => {
+  res.send({
+    location: config.location
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port http://0.0.0.0/${port}`);
 });
