@@ -1,11 +1,7 @@
 {
-  "location": "https://d2pjmukh9qywdn.cloudfront.net",
+  "location": "http://some-base.url",
   "videos": [
-    "004c6373-3db4-4a7a-8079-bcdd854c1564.mp4",
-    "00b81cf3-1628-4be7-887f-6c72097fbbf4.mp4",
-    "00ec357f-016f-4681-8ede-9c3d823e8358.mp4"
   ],
   "users": [
-    "blag"
   ]
 }
