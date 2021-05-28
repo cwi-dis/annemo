@@ -51,7 +51,7 @@ const Video: React.FC<VideoProps> = (props) => {
     <div style={{ width: "75%" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         {(location) && (
-          <div>
+          <div style={{ maxWidth: 800 }}>
             <video
               src={`${location}/${video}`}
               width="800"
@@ -71,7 +71,7 @@ const Video: React.FC<VideoProps> = (props) => {
               min={-1}
               max={1}
               step={0.01}
-              style={{ width: 800 }}
+              style={{ width: "100%" }}
               onChange={onSliderChanged}
             />
 
