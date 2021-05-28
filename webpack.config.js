@@ -8,7 +8,7 @@ const backend = {
     __dirname: true
   },
   entry: {
-    backend: "./emotions.ts",
+    backend: "./app.ts",
   },
   externals: [nodeExternals()],
   output: {
