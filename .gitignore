@@ -71,5 +71,6 @@ docs/
 REVISION
 CONTAINER_ALREADY_STARTED_PLACEHOLDER
 cert/
+results/
 
 *.swp

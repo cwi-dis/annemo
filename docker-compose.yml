@@ -8,6 +8,7 @@ services:
       - ./bin:/code/bin
       - ./static:/code/static
       - ./views:/code/views
+      - ./results:/code/results
     ports:
       - "3001:3001"
     command: sh -c "/wait && yarn start"
