@@ -33,6 +33,7 @@ const frontend = {
     ]
   },
   optimization: {
+    minimize: (process.env.NODE_ENV == "production"),
     minimizer: [
       `...`,
       new CssMinimizerPlugin()

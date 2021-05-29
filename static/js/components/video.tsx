@@ -34,7 +34,7 @@ const Video: React.FC = () => {
     setSliderValue(0);
   }, [dimension]);
 
-  // Save the dat by submitting it to the server via POST request
+  // Save the data by submitting it to the server via POST request
   const saveData = (value: number, time: number, playing: boolean) => {
     const data = {
       clienttime: Date.now(),
