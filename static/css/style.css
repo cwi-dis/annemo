@@ -9,3 +9,23 @@ body {
 .is-bold {
   font-weight: bold;
 }
+
+input[type=range] {
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  background: linear-gradient(90deg, #6290e0 0%, #a8a8a8 51% ,#bc3d27 100%);
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+
+  box-shadow: 1px 1px 1px #555555, 0px 0px 1px #0d0d0d;
+  border: 1px solid #555555;
+  height: 20px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
