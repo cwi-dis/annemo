@@ -2,18 +2,8 @@ import * as React from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { Dimensions } from "../util";
 import { RouterParams } from "./app";
-
-/**
- * Specifies social dimensions for each videos
- */
-interface Dimensions {
-  Agreement: number;
-  Engagement: number;
-  Dominance: number;
-  Performance: number;
-  Rapport: number;
-}
 
 /**
  * Renders sliders for each social dimension associated to a video

@@ -3,20 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
+import { capitalize } from "../util";
 import { RouterParams } from "./app";
-
-/**
- * Capitalises a word by converting its first letter to uppercase.
- *
- * @param word Word to be capitalised
- * @returns The input word with the first letter capitalised
- */
-function capitalize(word: string) {
-  const firstLetter = word.slice(0, 1);
-  const rest = word.slice(1);
-
-  return firstLetter.toUpperCase() + rest;
-}
 
 /**
  * Renders the application's sidebar, which contains links to all the videos
