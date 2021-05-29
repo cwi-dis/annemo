@@ -54,7 +54,15 @@ const Video: React.FC = () => {
   const onSliderChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (videoRef.current) {
       const videoElement = videoRef.current;
-      saveData(e.target.valueAsNumber, videoElement.currentTime, !videoElement.paused);
+
+      // Only send data to server if the video is playing
+      if (!videoElement.paused) {
+        saveData(
+          e.target.valueAsNumber,
+          videoElement.currentTime,
+          !videoElement.paused
+        );
+      }
     }
 
     setSliderValue(e.target.valueAsNumber);
