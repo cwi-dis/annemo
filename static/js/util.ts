@@ -2,11 +2,11 @@
  * Specifies social dimensions for each videos
  */
 export interface Dimensions {
-  Agreement: number;
-  Engagement: number;
-  Dominance: number;
-  Performance: number;
-  Rapport: number;
+  agreement: number;
+  engagement: number;
+  dominance: number;
+  performance: number;
+  rapport: number;
 }
 
 /**
