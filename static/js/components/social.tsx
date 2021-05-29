@@ -62,7 +62,7 @@ const Social: React.FC<SocialProps> = (props) => {
               {Object.entries(dimensions).map(([dimension, value]) => {
                 return (
                   <div key={dimension} style={{ width: "100%" }}>
-                    <h5 className="title is-5 mt-4" style={{ textAlign: "center" }}>
+                    <h5 className="title is-5 has-text-centered mt-4">
                       {dimension}
                     </h5>
 
@@ -89,7 +89,7 @@ const Social: React.FC<SocialProps> = (props) => {
               </button>
             </>
           ) : (
-            <h5 className="title is-5 mt-4" style={{ textAlign: "center"}}>
+            <h5 className="title is-5 has-text-centered mt-4">
               Thanks! Please proceed to the next video.
             </h5>
           )}

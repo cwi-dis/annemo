@@ -34,7 +34,9 @@ const App: React.FC<AppProps> = () => {
             </Switch>
           </Route>
           <Route path="/">
-            <p>Page not found</p>
+            <h3 className="title is-3 has-text-centered mt-4" style={{ width: "100%" }}>
+              Page not found
+            </h3>
           </Route>
         </Switch>
       </div>

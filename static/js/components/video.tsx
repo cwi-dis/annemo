@@ -69,7 +69,7 @@ const Video: React.FC<VideoProps> = (props) => {
               controls
             />
 
-            <h5 className="title is-5 mt-4" style={{ textAlign: "center" }}>
+            <h5 className="title is-5 has-text-centered mt-4">
               {dimension}
             </h5>
 
