@@ -22,6 +22,12 @@ command:
 This will start the server on port 3001 on your machine and the results will
 become available in the local `results/` directory.
 
+Once the server is running, open a browser and navigate to the URL
+`http://localhost:3001/#/user/test`, where `test` should be replaced with a
+username listed in the array associated with the `users` key in `config.json`.
+If the username is not valid (i.e. not listed in the config), no videos will
+be listed in the browser.
+
 ## Development
 
 If you want to modify the application youself, it's easier to start the
