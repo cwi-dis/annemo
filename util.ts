@@ -35,26 +35,26 @@ export function escapeQuotes(s: any) {
  */
 function isConfigValid(data: any): boolean {
   // Make sure all the keys a present
-  if (data.location && data.videos && data.users) {
-    // Return false if key location is not a string
-    if (!(typeof data.location == "string")) {
-      return false;
-    }
-
-    // Return false if key videos is not an array or its values aren't strings
-    if (!Array.isArray(data.videos) || data.videos.some((e: any) => typeof e != "string")) {
-      return false;
-    }
-
-    // Return false if key users is not an array or its values aren't strings
-    if (!Array.isArray(data.users) || data.users.some((e: any) => typeof e != "string")) {
-      return false;
-    }
-
-    return true;
+  if (!data.location || !data.videos || !data.users) {
+    return false;
   }
 
-  return false;
+  // Return false if key location is not a string
+  if (!(typeof data.location == "string")) {
+    return false;
+  }
+
+  // Return false if key videos is not an array or its values aren't strings
+  if (!Array.isArray(data.videos) || data.videos.some((e: any) => typeof e != "string")) {
+    return false;
+  }
+
+  // Return false if key users is not an array or its values aren't strings
+  if (!Array.isArray(data.users) || data.users.some((e: any) => typeof e != "string")) {
+    return false;
+  }
+
+  return true;
 }
 
 /**
