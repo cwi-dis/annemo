@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import throttle from "lodash.throttle";
 
 import { RouterParams } from "./app";
 
@@ -79,7 +80,7 @@ const Video: React.FC<VideoProps> = (props) => {
               max={1}
               step={0.01}
               style={{ width: "100%" }}
-              onChange={onSliderChanged}
+              onChange={throttle(onSliderChanged, 100)}
             />
 
             <div style={{ display: "flex", justifyContent: "space-between"}}>
