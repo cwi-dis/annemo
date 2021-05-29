@@ -84,9 +84,11 @@ const Social: React.FC<SocialProps> = (props) => {
                 );
               })}
 
-              <button className="button is-info mt-4" onClick={saveData}>
-                Save
-              </button>
+              <div style={{ display: "flex", justifyContent: "center", marginTop: 30 }}>
+                <button className="button is-info" style={{ width: 150 }} onClick={saveData}>
+                  Save
+                </button>
+              </div>
             </>
           ) : (
             <h5 className="title is-5 has-text-centered mt-4">
