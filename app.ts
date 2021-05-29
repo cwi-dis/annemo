@@ -29,6 +29,37 @@ function escapeQuotes(s: any) {
 }
 
 /**
+ * Checks whether the given object has the required structure to be interpreted
+ * as a config object.
+ *
+ * @param data Object to check
+ * @returns Whether the passed object has the required structure
+ */
+function isConfigValid(data: any): boolean {
+  // Make sure all the keys a present
+  if (data.location && data.videos && data.users) {
+    // Return false if key location is not a string
+    if (!(typeof data.location == "string")) {
+      return false;
+    }
+
+    // Return false if key videos is not an array or its values aren't strings
+    if (!Array.isArray(data.videos) || data.videos.some((e: any) => typeof e != "string")) {
+      return false;
+    }
+
+    // Return false if key users is not an array or its values aren't strings
+    if (!Array.isArray(data.users) || data.users.some((e: any) => typeof e != "string")) {
+      return false;
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
+/**
  * Loads the contents of the file `config.json`, parses them and returns them.
  * If the file `config.json` does not exist or could not be parsed, an error is
  * raised.
@@ -50,8 +81,15 @@ async function loadConfig(): Promise<Config> {
         reject(err);
       } else {
         try {
-          // Parse and resolve the promise with the parsed data
-          resolve(JSON.parse(data));
+          // Parse data read from file
+          const config = JSON.parse(data);
+
+          // Check whether parsed config data is valid
+          if (isConfigValid(config)) {
+            resolve(config);
+          } else {
+            reject("Config data invalid")
+          }
         } catch (err) {
           // Reject promise if file contents could not be parsed
           reject(err);
