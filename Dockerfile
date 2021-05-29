@@ -4,7 +4,7 @@ ADD ./static /code/
 WORKDIR /code
 
 RUN yarn install && \
-    yarn build && \
+    NODE_ENV=production yarn build && \
     yarn cache clean && \
     rm -rf node_modules/
 
@@ -16,7 +16,7 @@ WORKDIR /code
 COPY --from=frontend /code static/
 
 RUN yarn install && \
-    yarn build && \
+    NODE_ENV=production yarn build && \
     yarn cache clean
 
 EXPOSE 3000
