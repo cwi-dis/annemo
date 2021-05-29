@@ -1,4 +1,4 @@
-FROM troeggla/node-traction-mediavault:alpine-3.11 AS frontend
+FROM node:14.15.1-alpine3.11 AS frontend
 
 ADD ./static /code/
 WORKDIR /code
@@ -8,7 +8,7 @@ RUN yarn install && \
     yarn cache clean && \
     rm -rf node_modules/
 
-FROM troeggla/node-traction-mediavault:alpine-3.11 AS backend
+FROM node:14.15.1-alpine3.11 AS backend
 
 ADD . /code/
 WORKDIR /code
