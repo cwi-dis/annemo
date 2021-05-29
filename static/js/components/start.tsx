@@ -1,13 +1,10 @@
 import * as React from "react";
 
-interface StartProps {
-}
-
 /**
  * Component which is rendered at the very beginning, prompting the user to
  * select a video in the sidebar.
  */
-const Start: React.FC<StartProps> = (props) => {
+const Start: React.FC = () => {
   return (
     <div className="column is-9">
       <h5 className="title is-5 has-text-centered mt-4">

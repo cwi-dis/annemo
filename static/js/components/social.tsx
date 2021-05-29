@@ -15,13 +15,10 @@ interface Dimensions {
   Rapport: number;
 }
 
-interface SocialProps {
-}
-
 /**
  * Renders sliders for each social dimension associated to a video
  */
-const Social: React.FC<SocialProps> = (props) => {
+const Social: React.FC = () => {
   const { subject } = useParams<RouterParams>();
 
   const [ isSaved, setIsSaved ] = useState(false);

@@ -18,14 +18,11 @@ function capitalize(word: string) {
   return firstLetter.toUpperCase() + rest;
 }
 
-interface SidebarProps {
-}
-
 /**
  * Renders the application's sidebar, which contains links to all the videos
  * retrieved from the server.
  */
-const Sidebar: React.FC<SidebarProps> = (props) => {
+const Sidebar: React.FC = () => {
   const location = useLocation();
   const { subject } = useParams<RouterParams>();
 

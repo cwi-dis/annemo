@@ -5,16 +5,13 @@ import throttle from "lodash.throttle";
 
 import { RouterParams } from "./app";
 
-interface VideoProps {
-}
-
 /**
  * Renders a video element alongside a slider for annotating either arousal or
  * valence. The slider values are submitted to the server via POST request on
  * change. A throttling function makes sure a value is submitted at most every
  * 100ms to avoid chocking the server.
  */
-const Video: React.FC<VideoProps> = (props) => {
+const Video: React.FC = () => {
   // Get video name, subject name and dimension from routing params
   const { video, dimension, subject } = useParams<RouterParams>();
   // Ref for interacting with the video element

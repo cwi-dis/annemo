@@ -16,13 +16,11 @@ export interface RouterParams {
   dimension: string;
 }
 
-interface AppProps {}
-
 /**
  * Central App component which contains the basic layout and routing
  * specification for the application.
  */
-const App: React.FC<AppProps> = () => {
+const App: React.FC = () => {
   return (
     <Router>
       <div className="columns">
