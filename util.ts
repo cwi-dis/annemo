@@ -1,5 +1,4 @@
-import fs from "fs";
-import { access, mkdir } from "fs/promises";
+import fs from "fs/promises";
 import path from "path";
 
 /**
@@ -65,36 +64,18 @@ function isConfigValid(data: any): boolean {
  * @returns The contents of the config file
  */
 export async function loadConfig(): Promise<Config> {
-  return new Promise((resolve, reject) => {
-    // Check if the file `config.json` exists
-    if (!fs.existsSync(path.join(__dirname, "config.json"))) {
-      reject("Config file not found");
-      return;
-    }
+  const configPath = path.join(__dirname, "config.json");
 
-    // Attempt to read the file
-    fs.readFile(path.join(__dirname, "config.json"), "utf-8", (err, data) => {
-      if (err) {
-        // Reject promise if file could not be read
-        reject(err);
-      } else {
-        try {
-          // Parse data read from file
-          const config = JSON.parse(data);
-
-          // Check whether parsed config data is valid
-          if (isConfigValid(config)) {
-            resolve(config);
-          } else {
-            reject("Config data invalid")
-          }
-        } catch (err) {
-          // Reject promise if file contents could not be parsed
-          reject(err);
-        }
-      }
-    })
+  const data = await fs.readFile(configPath, {
+    encoding: "utf-8"
   });
+  const config = JSON.parse(data);
+
+  if (isConfigValid(config)) {
+    return config;
+  } else {
+    throw "Config data invalid";
+  }
 }
 
 /**
@@ -105,22 +86,13 @@ export async function loadConfig(): Promise<Config> {
  * @param line Line to append to the file
  */
 export async function saveToCSV(subject: string, line: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    // Create write stream for the file identified by the value in `subject`
-    // in the `results/` directory
-    const writer = fs.createWriteStream(path.join(__dirname, "results", `${subject}.csv`), {
-      flags: "a"
-    });
+  // Compute output path
+  const outputPath = path.join(__dirname, "results", `${subject}.csv`);
 
-    // Write the line to the file, reject promise if an error occurs
-    writer.write(line, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
+  // Write data to file
+  return await fs.writeFile(outputPath, line, {
+    flag: "a"
+  })
 }
 
 /**
@@ -131,8 +103,8 @@ export async function checkResultsDirectory() {
 
   // Check if directory `results/` exists. If not, attempt to create it
   try {
-    await access(resultsDir);
+    await fs.access(resultsDir);
   } catch {
-    await mkdir(resultsDir, 0o755);
+    await fs.mkdir(resultsDir, 0o755);
   }
 }
