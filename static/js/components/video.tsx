@@ -68,6 +68,17 @@ const Video: React.FC = () => {
     setSliderValue(e.target.valueAsNumber);
   };
 
+  const onVideoEnded = () => {
+    // Submit one more sample once the video finishes playing
+    if (videoRef.current) {
+      saveData(
+        sliderValue,
+        videoRef.current.currentTime,
+        false
+      )
+    }
+  };
+
   return (
     <div className="column is-9">
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -79,15 +90,7 @@ const Video: React.FC = () => {
               height="600"
               preload="auto"
               ref={videoRef}
-              onEnded={() => {
-                // Submit on more sample once the video finishes playing
-                if (videoRef.current)
-                  saveData(
-                    sliderValue,
-                    videoRef.current.currentTime,
-                    false
-                  )
-              }}
+              onEnded={onVideoEnded}
               controls
             />
 
