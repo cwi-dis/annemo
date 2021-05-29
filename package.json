@@ -1,5 +1,5 @@
 {
-  "name": "Annemo",
+  "name": "annemo",
   "version": "1.0.0",
   "description": "Emotion recognition experiments",
   "main": "./app.ts",
