@@ -22,27 +22,25 @@ const Video: React.FC<VideoProps> = (props) => {
     });
   }, []);
 
+  const saveData = (value: number, time: number, playing: boolean) => {
+    const data = {
+      clienttime: Date.now(),
+      subject, video, dimension, time, value, playing
+    };
+
+    fetch("/emotion", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        subject, data
+      })
+    });
+  }
+
   const onSliderChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (videoRef.current) {
       const videoElement = videoRef.current;
-
-      const data = {
-        clienttime: Date.now(),
-        subject,
-        video,
-        dimension,
-        time: videoElement.currentTime,
-        value: e.target.valueAsNumber,
-        playing: !videoElement.paused,
-      };
-
-      fetch("/emotion", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          subject, data
-        })
-      });
+      saveData(e.target.valueAsNumber, videoElement.currentTime, !videoElement.paused);
     }
 
     setSliderValue(e.target.valueAsNumber);
@@ -59,6 +57,14 @@ const Video: React.FC<VideoProps> = (props) => {
               height="600"
               preload="auto"
               ref={videoRef}
+              onEnded={() => {
+                if (videoRef.current)
+                  saveData(
+                    sliderValue,
+                    videoRef.current.currentTime,
+                    false
+                  )
+              }}
               controls
             />
 
