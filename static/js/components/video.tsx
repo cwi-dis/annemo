@@ -32,6 +32,11 @@ const Video: React.FC<VideoProps> = (props) => {
     });
   }, []);
 
+  useEffect(() => {
+    // Reset slider value to zero if value of param dimension changes
+    setSliderValue(0);
+  }, [dimension]);
+
   // Save the dat by submitting it to the server via POST request
   const saveData = (value: number, time: number, playing: boolean) => {
     const data = {
@@ -87,6 +92,7 @@ const Video: React.FC<VideoProps> = (props) => {
 
             <input
               type="range"
+              key={`${video}.${dimension}`}
               value={sliderValue}
               min={-1}
               max={1}
