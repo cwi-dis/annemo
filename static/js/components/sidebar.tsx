@@ -33,37 +33,37 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     <div className="column is-3">
       <h4 className="title is-4">Videos</h4>
 
-      <ul>
+      <div className="sidebar-elements">
         {videos.map((v, i) => {
-          const videoLinks = ["arousal", "valence"].map((dim, j) => {
-            return (
-              <li key={`${i}.${j}`}>
-                <Link
-                  to={`/user/${subject}/video/${v}/${dim}`}
-                  className={classNames({ "is-bold": location.pathname == `/user/${subject}/video/${v}/${dim}`})}
-                >
-                  {capitalize(dim)} - {v}
-                </Link>
-              </li>
-            );
-          });
-
-          return videoLinks.concat(
-            <li key={`social.${i}`}>
-              <Link
-                to={`/user/${subject}/social/${v}`}
-                className={classNames({ "is-bold": location.pathname == `/user/${subject}/social/${v}`})}
-              >
-                Social dimension annotation
-              </Link>
-            </li>
-          ).concat(
-            <li key={`divider.${i}`}>
-              <hr/>
-            </li>
+          return (
+            <div key={`segment.${i}`} className="segment">
+              <ul>
+                {["arousal", "valence"].map((dim, j) => {
+                  return (
+                    <li key={`${i}.${j}`}>
+                      <Link
+                        to={`/user/${subject}/video/${v}/${dim}`}
+                        className={classNames({ "is-bold": location.pathname == `/user/${subject}/video/${v}/${dim}`})}
+                      >
+                        {capitalize(dim)} - {v}
+                      </Link>
+                    </li>
+                  );
+                }).concat(
+                  <li key={`social.${i}`}>
+                    <Link
+                      to={`/user/${subject}/social/${v}`}
+                      className={classNames({ "is-bold": location.pathname == `/user/${subject}/social/${v}`})}
+                    >
+                      Social dimension annotation
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };

@@ -10,6 +10,24 @@ body {
   font-weight: bold;
 }
 
+.sidebar-elements .segment {
+  border-bottom: 1px solid #D2D2D2;
+  padding: 1rem 0;
+}
+
+.sidebar-elements .segment li {
+  padding: 0 0 5px 0;
+}
+
+.segment:first-child {
+  padding-top: 0;
+}
+
+.segment:last-child {
+  padding-bottom: 0;
+  border: none;
+}
+
 input[type=range] {
   -webkit-appearance: none;
 }
