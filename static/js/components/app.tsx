@@ -3,6 +3,7 @@ import { Route, HashRouter as Router, Switch } from "react-router-dom";
 
 import Sidebar from "./sidebar";
 import Social from "./social";
+import Start from "./start";
 import Video from "./video";
 
 export interface RouterParams {
@@ -26,6 +27,9 @@ const App: React.FC<AppProps> = () => {
               </Route>
               <Route path="/user/:subject/social/:video">
                 <Social />
+              </Route>
+              <Route path="/">
+                <Start />
               </Route>
             </Switch>
           </Route>
