@@ -1,8 +1,12 @@
 const webpack = require("webpack");
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
 const frontend = {
   mode: process.env.NODE_ENV || "development",
   target: "web",
+  plugins: [new MiniCssExtractPlugin()],
   entry: {
     bundle: "./js/main.ts"
   },
@@ -22,10 +26,16 @@ const frontend = {
       }, {
         test: /\.css$/,
         use: [
-          "style-loader",
+          MiniCssExtractPlugin.loader,
           "css-loader"
         ]
       }
+    ]
+  },
+  optimization: {
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin()
     ]
   }
 };
