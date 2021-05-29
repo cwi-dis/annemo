@@ -3,6 +3,10 @@ import * as React from "react";
 interface StartProps {
 }
 
+/**
+ * Component which is rendered at the very beginning, prompting the user to
+ * select a video in the sidebar.
+ */
 const Start: React.FC<StartProps> = (props) => {
   return (
     <div className="column is-9">

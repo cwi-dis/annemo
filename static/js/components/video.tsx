@@ -8,14 +8,23 @@ import { RouterParams } from "./app";
 interface VideoProps {
 }
 
+/**
+ * Renders a video element alongside a slider for annotating either arousal or
+ * valence. The slider values are submitted to the server via POST request on
+ * change. A throttling function makes sure a value is submitted at most every
+ * 100ms to avoid chocking the server.
+ */
 const Video: React.FC<VideoProps> = (props) => {
+  // Get video name, subject name and dimension from routing params
   const { video, dimension, subject } = useParams<RouterParams>();
+  // Ref for interacting with the video element
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [ location, setLocation ] = useState<string>();
   const [ sliderValue, setSliderValue ] = useState<number>(0);
 
   useEffect(() => {
+    // Fetches the base URL for the video file from the server
     fetch("/location").then((res) => {
       return res.json();
     }).then((data) => {
@@ -23,6 +32,7 @@ const Video: React.FC<VideoProps> = (props) => {
     });
   }, []);
 
+  // Save the dat by submitting it to the server via POST request
   const saveData = (value: number, time: number, playing: boolean) => {
     const data = {
       clienttime: Date.now(),
@@ -38,6 +48,7 @@ const Video: React.FC<VideoProps> = (props) => {
     });
   }
 
+  // Callback which is invoked when the slider value changes
   const onSliderChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (videoRef.current) {
       const videoElement = videoRef.current;
@@ -59,6 +70,7 @@ const Video: React.FC<VideoProps> = (props) => {
               preload="auto"
               ref={videoRef}
               onEnded={() => {
+                // Submit on more sample once the video finishes playing
                 if (videoRef.current)
                   saveData(
                     sliderValue,

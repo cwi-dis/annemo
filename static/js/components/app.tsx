@@ -7,6 +7,9 @@ import Social from "./social";
 import Start from "./start";
 import Video from "./video";
 
+/**
+ * Elements which may be present in router params
+ */
 export interface RouterParams {
   subject: string;
   video: string;
@@ -15,6 +18,10 @@ export interface RouterParams {
 
 interface AppProps {}
 
+/**
+ * Central App component which contains the basic layout and routing
+ * specification for the application.
+ */
 const App: React.FC<AppProps> = () => {
   return (
     <Router>

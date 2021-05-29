@@ -3,6 +3,9 @@ import * as React from "react";
 interface NotFoundProps {
 }
 
+/**
+ * Renders a "Not found" message occupying the full screen.
+ */
 const NotFound: React.FC<NotFoundProps> = (props) => {
   return (
     <div className="column is-13">

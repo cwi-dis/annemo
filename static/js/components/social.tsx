@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 
 import { RouterParams } from "./app";
 
+/**
+ * Specifies social dimensions for each videos
+ */
 interface Dimensions {
   Agreement: number;
   Engagement: number;
@@ -15,10 +18,14 @@ interface Dimensions {
 interface SocialProps {
 }
 
+/**
+ * Renders sliders for each social dimension associated to a video
+ */
 const Social: React.FC<SocialProps> = (props) => {
   const { subject } = useParams<RouterParams>();
 
   const [ isSaved, setIsSaved ] = useState(false);
+  // Initialise each dimension to zero
   const [ dimensions, setDimensions ] = useState<Dimensions>({
     "Agreement": 0,
     "Engagement": 0,
@@ -27,6 +34,7 @@ const Social: React.FC<SocialProps> = (props) => {
     "Rapport": 0
   });
 
+  // Function to update a given dimension to a specific value
   const updateDimension = (dimension: keyof Dimensions, value: number) => {
     setDimensions({
       ...dimensions,
@@ -34,6 +42,7 @@ const Social: React.FC<SocialProps> = (props) => {
     });
   };
 
+  // Saves the data on the server by means of a POST request
   const saveData = async () => {
     try {
       await fetch("/social", {
@@ -60,6 +69,7 @@ const Social: React.FC<SocialProps> = (props) => {
           {(!isSaved) ? (
             <>
               {Object.entries(dimensions).map(([dimension, value]) => {
+                // Generate a slider for each dimension
                 return (
                   <div key={dimension} style={{ width: "100%" }}>
                     <h5 className="title is-5 has-text-centered mt-4">

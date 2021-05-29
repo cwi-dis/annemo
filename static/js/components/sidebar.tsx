@@ -5,6 +5,12 @@ import classNames from "classnames";
 
 import { RouterParams } from "./app";
 
+/**
+ * Capitalises a word by converting its first letter to uppercase.
+ *
+ * @param word Word to be capitalised
+ * @returns The input word with the first letter capitalised
+ */
 function capitalize(word: string) {
   const firstLetter = word.slice(0, 1);
   const rest = word.slice(1);
@@ -15,6 +21,10 @@ function capitalize(word: string) {
 interface SidebarProps {
 }
 
+/**
+ * Renders the application's sidebar, which contains links to all the videos
+ * retrieved from the server.
+ */
 const Sidebar: React.FC<SidebarProps> = (props) => {
   const location = useLocation();
   const { subject } = useParams<RouterParams>();
@@ -22,6 +32,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   const [ videos, setVideos ] = useState<Array<string>>([]);
 
   useEffect(() => {
+    // Fetch list of videos from the server, passing subject name along with
+    // the request. If the subject name is not valid, an empty list is returned.
     fetch(`/videos?subject=${subject}`).then((res) => {
       return res.json();
     }).then((data) => {
@@ -39,6 +51,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             <div key={`segment.${i}`} className="segment">
               <ul>
                 {["arousal", "valence"].map((dim, j) => {
+                  // Return a link for both, arousal and valence for each video
                   return (
                     <li key={`${i}.${j}`}>
                       <Link
