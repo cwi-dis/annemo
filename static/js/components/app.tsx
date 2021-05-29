@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
+import NotFound from "./not_found";
 
 import Sidebar from "./sidebar";
 import Social from "./social";
@@ -34,11 +35,7 @@ const App: React.FC<AppProps> = () => {
             </Switch>
           </Route>
           <Route path="/">
-            <div className="column is-12">
-              <h3 className="title is-3 has-text-centered mt-4">
-                Page not found
-              </h3>
-            </div>
+            <NotFound />
           </Route>
         </Switch>
       </div>
