@@ -3,7 +3,7 @@ import path from "path";
 import logger from "morgan";
 import dateFormat from "dateformat";
 
-import { checkResultsDirectory, Config, escapeQuotes, loadConfig, saveToCSV } from "./util";
+import { checkResultsDirectory, Config, escapeString, loadConfig, saveToCSV } from "./util";
 
 /**
  * Starts an Express HTTP server with the values given in the param `config`.
@@ -66,9 +66,9 @@ async function startServer(config: Config) {
     }
 
     // Extract values from body and escape quotes
-    const values = Object.values(data).map(escapeQuotes);
+    const values = Object.values(data).map(escapeString);
     // Generate formatted date string
-    const formattedDate = escapeQuotes(dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT"))
+    const formattedDate = escapeString(dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT"))
 
     try {
       // Generate and save line to file
@@ -99,7 +99,7 @@ async function startServer(config: Config) {
     }
 
     // Extract values from body and escape quotes
-    const values = Object.values(data).map(escapeQuotes);
+    const values = Object.values(data).map(escapeString);
 
     try {
       // Generate and save line to file

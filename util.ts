@@ -11,17 +11,21 @@ export interface Config {
 }
 
 /**
- * Escapes potential quotes in the given input string. If the value passed is
- * not a string, it is returned unchanged.
+ * Surrounds a value with double quotes if it is a string and contains one or
+ * more commas. If the string contains double quotes, they are escaped. If the
+ * given value is not a string, it is returned unchanged.
  *
- * @param s String to be escaped
- * @returns The input string with all quotes escaped
+ * @param s Value to be escaped
+ * @returns The input surrounded by quotes if it contains a comma, otherwise unchanged
  */
-export function escapeQuotes(s: any) {
+export function escapeString<T>(s: T): T;
+export function escapeString(s: string): string {
+  // Check if input is a string and contains a comma
   if (typeof s == "string" && s.indexOf(",") >= 0) {
-    return '"' + s.replace(/"/g, '\\"') + '"';
+    return `"${s.replace(/"/g, '\\"')}"`;
   }
 
+  // Return unchanged otherwise
   return s;
 }
 
