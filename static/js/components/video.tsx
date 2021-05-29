@@ -48,7 +48,7 @@ const Video: React.FC<VideoProps> = (props) => {
   };
 
   return (
-    <div style={{ width: "75%" }}>
+    <div className="column is-9">
       <div style={{ display: "flex", justifyContent: "center" }}>
         {(location) && (
           <div style={{ maxWidth: 800 }}>

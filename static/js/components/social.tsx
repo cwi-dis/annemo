@@ -52,7 +52,7 @@ const Social: React.FC<SocialProps> = (props) => {
   };
 
   return (
-    <div style={{ width: "75%" }}>
+    <div className="column is-9">
       <h4 className="title is-4">Social Dimension Annotation</h4>
 
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -84,10 +84,12 @@ const Social: React.FC<SocialProps> = (props) => {
                 );
               })}
 
-              <div style={{ display: "flex", justifyContent: "center", marginTop: 30 }}>
-                <button className="button is-info" style={{ width: 150 }} onClick={saveData}>
-                  Save
-                </button>
+              <div className="columns is-centered" style={{ marginTop: 30 }}>
+                <div className="column is-3">
+                  <button className="button is-info is-fullwidth" onClick={saveData}>
+                    Save
+                  </button>
+                </div>
               </div>
             </>
           ) : (

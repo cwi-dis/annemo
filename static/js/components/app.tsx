@@ -17,7 +17,7 @@ interface AppProps {}
 const App: React.FC<AppProps> = () => {
   return (
     <Router>
-      <div style={{ display: "flex" }}>
+      <div className="columns">
         <Switch>
           <Route path="/user/:subject">
             <Sidebar />
@@ -34,9 +34,11 @@ const App: React.FC<AppProps> = () => {
             </Switch>
           </Route>
           <Route path="/">
-            <h3 className="title is-3 has-text-centered mt-4" style={{ width: "100%" }}>
-              Page not found
-            </h3>
+            <div className="column is-12">
+              <h3 className="title is-3 has-text-centered mt-4">
+                Page not found
+              </h3>
+            </div>
           </Route>
         </Switch>
       </div>

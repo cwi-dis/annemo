@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   }, []);
 
   return (
-    <div style={{ width: "25%" }}>
+    <div className="column is-3">
       <h4 className="title is-4">Videos</h4>
 
       <ul>
