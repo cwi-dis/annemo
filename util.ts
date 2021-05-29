@@ -1,4 +1,5 @@
 import fs from "fs";
+import { access, mkdir } from "fs/promises";
 import path from "path";
 
 /**
@@ -120,4 +121,18 @@ export async function saveToCSV(subject: string, line: string): Promise<void> {
       }
     });
   });
+}
+
+/**
+ * Checks if the directory `results/` exists and creates it if not.
+ */
+export async function checkResultsDirectory() {
+  const resultsDir = path.join(__dirname, "results");
+
+  // Check if directory `results/` exists. If not, attempt to create it
+  try {
+    await access(resultsDir);
+  } catch {
+    await mkdir(resultsDir, 0o755);
+  }
 }

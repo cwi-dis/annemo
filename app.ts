@@ -1,25 +1,21 @@
 import express from "express";
 import path from "path";
-import fs from "fs";
 import logger from "morgan";
 import dateFormat from "dateformat";
 
-import { Config, escapeQuotes, loadConfig, saveToCSV } from "./util";
+import { checkResultsDirectory, Config, escapeQuotes, loadConfig, saveToCSV } from "./util";
 
 /**
  * Starts an Express HTTP server with the values given in the param `config`.
  *
  * @param config Config for the server
  */
-function startServer(config: Config) {
+async function startServer(config: Config) {
   // Init app
   const app = express();
-  const resultsDir = path.join(__dirname, "results");
 
   // Check if directory `results/` exists. If not, attempt to create it
-  if (!fs.existsSync(resultsDir)) {
-    fs.mkdirSync(resultsDir, 0o755);
-  }
+  await checkResultsDirectory();
 
   // Use ejs view engine
   app.set("views", path.join(__dirname, "views"));
