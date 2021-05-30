@@ -26,7 +26,7 @@ async function startServer(config: Config) {
   app.set("port", port);
 
   // Set static for and set up middlewares
-  app.use(express.static("static"))
+  app.use(express.static("static"));
   app.use(express.urlencoded({ extended: false }));
   app.use(logger("dev"));
   app.use(express.json());
@@ -51,7 +51,7 @@ async function startServer(config: Config) {
     }
 
     // Otherwise, return empty list
-    res.send({ videos: [] })
+    res.send({ videos: [] });
   });
 
   // Receive and save emotion data point
@@ -68,17 +68,17 @@ async function startServer(config: Config) {
     // Extract values from body and escape quotes
     const values = Object.values(data).map(escapeString);
     // Generate formatted date string
-    const formattedDate = escapeString(dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT"))
+    const formattedDate = escapeString(dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 
     try {
       // Generate and save line to file
-      const csv = formattedDate + "," + values.join(",") + "\n"
+      const csv = formattedDate + "," + values.join(",") + "\n";
       await saveToCSV(subject, csv);
 
       // Return success
       res.send({
         status: "OK"
-      })
+      });
     } catch (err) {
       // Return with error 500 on error
       res.status(500).send({
@@ -109,7 +109,7 @@ async function startServer(config: Config) {
       // Return success
       res.send({
         status: "OK"
-      })
+      });
     } catch (err) {
       // Return with error 500 on error
       res.status(500).send({
@@ -127,7 +127,7 @@ async function startServer(config: Config) {
 
   // Set up server for listening on configured port
   app.listen(port, () => {
-    console.log(`Server listening on port http://0.0.0.0/${port}`);
+    console.log(`Server listening on port http://0.0.0.0:${port}`);
   });
 }
 

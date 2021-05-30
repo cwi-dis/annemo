@@ -48,7 +48,7 @@ const Video: React.FC = () => {
         subject, data
       })
     });
-  }
+  };
 
   // Callback which is invoked when the slider value changes
   const onSliderChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +75,7 @@ const Video: React.FC = () => {
         sliderValue,
         videoRef.current.currentTime,
         false
-      )
+      );
     }
   };
 

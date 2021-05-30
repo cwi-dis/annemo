@@ -22,7 +22,7 @@ export function escapeString<T>(s: T): T;
 export function escapeString(s: string): string {
   // Check if input is a string and contains a comma
   if (typeof s == "string" && s.indexOf(",") >= 0) {
-    return `"${s.replace(/"/g, '\\"')}"`;
+    return `"${s.replace(/"/g, "\\\"")}"`;
   }
 
   // Return unchanged otherwise
@@ -96,7 +96,7 @@ export async function saveToCSV(subject: string, line: string): Promise<void> {
   // Write data to file
   return await fs.writeFile(outputPath, line, {
     flag: "a"
-  })
+  });
 }
 
 /**
