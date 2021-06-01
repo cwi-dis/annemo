@@ -3,7 +3,10 @@ import path from "path";
 import logger from "morgan";
 import dateFormat from "dateformat";
 
-import { checkResultsDirectory, Config, escapeString, getResultFiles, loadConfig, saveToCSV } from "./util";
+import {
+  checkResultsDirectory, Config, deleteResultFile, escapeString,
+  getResultFiles, loadConfig, saveToCSV
+} from "./util";
 
 /**
  * Starts an Express HTTP server with the values given in the param `config`.
@@ -137,6 +140,13 @@ async function startServer(config: Config) {
     res.download(
       path.join(__dirname, "results", fname)
     );
+  });
+
+  app.post("/download/:fname/delete", async (req, res) => {
+    const { fname } = req.params;
+    await deleteResultFile(fname);
+
+    res.redirect("/download");
   });
 
   // Set up server for listening on configured port
