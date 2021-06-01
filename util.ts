@@ -125,3 +125,17 @@ export async function getResultFiles() {
 
   return files.map((f) => path.basename(f)).filter((f) => f.endsWith(".csv"));
 }
+
+/**
+ * Deletes the given file in the results directory.
+ *
+ * @param fname File to be deleted
+ */
+export async function deleteResultFile(fname: string) {
+  const resultsDir = path.join(__dirname, "results");
+  const basename = path.basename(fname);
+
+  if (basename.endsWith(".csv")) {
+    await fs.unlink(path.join(resultsDir, basename));
+  }
+}
