@@ -3,7 +3,7 @@ import path from "path";
 import logger from "morgan";
 import dateFormat from "dateformat";
 
-import { checkResultsDirectory, Config, escapeString, loadConfig, saveToCSV } from "./util";
+import { checkResultsDirectory, Config, escapeString, getResultFiles, loadConfig, saveToCSV } from "./util";
 
 /**
  * Starts an Express HTTP server with the values given in the param `config`.
@@ -122,6 +122,12 @@ async function startServer(config: Config) {
   app.get("/location", (req, res) => {
     res.send({
       location: config.location
+    });
+  });
+
+  app.get("/download", async (req, res) => {
+    res.render("download", {
+      files: await getResultFiles()
     });
   });
 
