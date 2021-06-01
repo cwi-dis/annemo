@@ -112,3 +112,16 @@ export async function checkResultsDirectory() {
     await fs.mkdir(resultsDir, 0o755);
   }
 }
+
+/**
+ * Returns a list containing the names for available result CSV files located
+ * in the `results/` directory.
+ *
+ * @returns A list of filenames located in the `results/` directory
+ */
+export async function getResultFiles() {
+  const resultsDir = path.join(__dirname, "results");
+  const files = await fs.readdir(resultsDir);
+
+  return files.map((f) => path.basename(f)).filter((f) => f.endsWith(".csv"));
+}
