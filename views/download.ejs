@@ -26,6 +26,9 @@
                     <p>
                       <a href="/download/<%= file %>"><%= file %></a>
                     </p>
+                    <form style="margin-left: auto;" method="POST" action="/download/<%= file %>/delete">
+                      <button class="delete"></button>
+                    </form>
                   </div>
                 <% }) %>
               </article>
