@@ -13,11 +13,23 @@
         <div class="columns is-centered">
           <div class="column is-6-widescreen is-9-tablet">
               <h1 class="title">Downloads</h1>
+              <h2 class="subtitle">Data collected during the trials</h2>
 
-              <article class="panel">
+              <hr/>
+
+              <article class="panel is-info">
                 <p class="panel-heading">
                   Available Files
                 </p>
+
+                <% if (files.length == 0) { %>
+                  <div class="panel-block">
+                    <p>
+                      No files available
+                    </p>
+                  </div>
+                <% } %>
+
                 <% files.forEach((file) => { %>
                   <div class="panel-block">
                     <span class="panel-icon">
