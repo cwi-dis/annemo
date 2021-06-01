@@ -131,6 +131,14 @@ async function startServer(config: Config) {
     });
   });
 
+  app.get("/download/:fname", (req, res) => {
+    const { fname } = req.params;
+
+    res.download(
+      path.join(__dirname, "results", fname)
+    );
+  });
+
   // Set up server for listening on configured port
   app.listen(port, () => {
     console.log(`Server listening on port http://0.0.0.0:${port}`);
