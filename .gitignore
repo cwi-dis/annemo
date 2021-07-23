@@ -73,5 +73,6 @@ CONTAINER_ALREADY_STARTED_PLACEHOLDER
 cert/
 results/
 config.json
+static/videos/
 
 *.swp
