@@ -17,17 +17,7 @@ const Video: React.FC = () => {
   // Ref for interacting with the video element
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [ location, setLocation ] = useState<string>();
   const [ sliderValue, setSliderValue ] = useState<number>(0);
-
-  useEffect(() => {
-    // Fetches the base URL for the video file from the server
-    fetch("/location").then((res) => {
-      return res.json();
-    }).then((data) => {
-      setLocation(data.location);
-    });
-  }, []);
 
   useEffect(() => {
     // Reset slider value to zero if value of param dimension changes
@@ -85,7 +75,7 @@ const Video: React.FC = () => {
         {(location) && (
           <div style={{ maxWidth: 800 }}>
             <video
-              src={`${location}/${video}`}
+              src={`/videos/${video}`}
               width="800"
               height="600"
               preload="auto"
