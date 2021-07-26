@@ -69,6 +69,14 @@ const Video: React.FC = () => {
     }
   };
 
+  const onPlaybackRateChanged = (val: number) => {
+    console.log("Setting playback rate to:", val);
+
+    if (videoRef.current) {
+      videoRef.current.playbackRate = val;
+    }
+  };
+
   return (
     <div className="column is-9">
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -83,6 +91,17 @@ const Video: React.FC = () => {
               onEnded={onVideoEnded}
               controls
             />
+
+            <div>
+              <select defaultValue="1.0" onChange={(e) => onPlaybackRateChanged(parseFloat(e.currentTarget.value))}>
+                <option value="0.25">0.25</option>
+                <option value="0.5">0.5</option>
+                <option value="0.75">0.75</option>
+                <option value="1.0">1.0</option>
+                <option value="1.5">1.5</option>
+                <option value="2.0">2.0</option>
+              </select>
+            </div>
 
             <h5 className="title is-5 has-text-centered mt-4">
               {dimension}
