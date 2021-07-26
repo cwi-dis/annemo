@@ -100,8 +100,8 @@ const Video: React.FC = () => {
             />
 
             <div style={{ display: "flex", justifyContent: "space-between"}}>
-              <p>{(dimension == "arousal") ? "very passive" : "very negative"}</p>
-              <p>{(dimension == "arousal") ? "very active" : "very positive"}</p>
+              <p>{(dimension == "arousal") ? "very calm" : "very negative"}</p>
+              <p>{(dimension == "arousal") ? "very excited" : "very positive"}</p>
             </div>
           </div>
         )}
