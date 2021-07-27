@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import throttle from "lodash.throttle";
 
 import { RouterParams } from "./app";
+import VideoWithRateChange from "./video_with_rate_change";
 
 /**
  * Renders a video element alongside a slider for annotating either arousal or
@@ -17,7 +18,8 @@ const Video: React.FC = () => {
   // Ref for interacting with the video element
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [ sliderValue, setSliderValue ] = useState<number>(0);
+  const [ sliderValue, setSliderValue ] = useState(0);
+  const [ playbackRate, setPlaybackRate ] = useState(1.0);
 
   useEffect(() => {
     // Reset slider value to zero if value of param dimension changes
@@ -69,37 +71,30 @@ const Video: React.FC = () => {
     }
   };
 
-  const onPlaybackRateChanged = (val: number) => {
-    console.log("Setting playback rate to:", val);
-
-    if (videoRef.current) {
-      videoRef.current.playbackRate = val;
-    }
-  };
-
   return (
     <div className="column is-9">
       <div style={{ display: "flex", justifyContent: "center" }}>
         {(location) && (
           <div style={{ maxWidth: 800 }}>
-            <video
+            <VideoWithRateChange
               src={`/videos/${video}`}
               width="800"
               height="600"
               preload="auto"
               ref={videoRef}
+              playbackRate={playbackRate}
               onEnded={onVideoEnded}
               controls
             />
 
             <div>
-              <select defaultValue="1.0" onChange={(e) => onPlaybackRateChanged(parseFloat(e.currentTarget.value))}>
-                <option value="0.25">0.25</option>
-                <option value="0.5">0.5</option>
-                <option value="0.75">0.75</option>
-                <option value="1.0">1.0</option>
-                <option value="1.5">1.5</option>
-                <option value="2.0">2.0</option>
+              <select value={playbackRate} onChange={(e) => setPlaybackRate(parseFloat(e.currentTarget.value))}>
+                <option value={0.25}>0.25</option>
+                <option value={0.5}>0.5</option>
+                <option value={0.75}>0.75</option>
+                <option value={1.0}>1.0</option>
+                <option value={1.5}>1.5</option>
+                <option value={2.0}>2.0</option>
               </select>
             </div>
 
