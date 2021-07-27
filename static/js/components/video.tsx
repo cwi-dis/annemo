@@ -26,6 +26,11 @@ const Video: React.FC = () => {
     setSliderValue(0);
   }, [dimension]);
 
+  useEffect(() => {
+    // Reset playback rate to 1.0 every time video src or dimension changes
+    setPlaybackRate(1.0);
+  }, [video, dimension]);
+
   // Save the data by submitting it to the server via POST request
   const saveData = (value: number, time: number, playing: boolean) => {
     const data = {
