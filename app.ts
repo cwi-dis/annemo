@@ -124,7 +124,7 @@ async function startServer(config: Config) {
   // Return base URL for video files from config
   app.get("/location", (req, res) => {
     res.send({
-      location: config.location
+      location: config.location || "/videos"
     });
   });
 
