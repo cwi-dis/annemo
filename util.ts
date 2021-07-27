@@ -5,7 +5,7 @@ import path from "path";
  * Specifies the shape of the data loaded from `config.json`
  */
 export interface Config {
-  location: string;
+  location?: string;
   videos: Array<string>;
   users: Array<string>;
 }
@@ -38,12 +38,12 @@ export function escapeString(s: string): string {
  */
 function isConfigValid(data: any): boolean {
   // Make sure all the keys a present
-  if (!data.location || !data.videos || !data.users) {
+  if (!data.videos || !data.users) {
     return false;
   }
 
   // Return false if key location is not a string
-  if (!(typeof data.location == "string")) {
+  if (data.location && !(typeof data.location == "string")) {
     return false;
   }
 
