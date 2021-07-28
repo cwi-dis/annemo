@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import throttle from "lodash.throttle";
 
 import { RouterParams } from "./app";
 import VideoWithRateChange from "./video_with_rate_change";
@@ -55,36 +54,35 @@ const Video: React.FC = () => {
 
   // Callback which is invoked when the slider value changes
   const onSliderChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSliderValue(e.target.valueAsNumber);
+  };
+
+  const onTimeUpdate = () => {
     if (videoRef.current) {
       const videoElement = videoRef.current;
 
       // Only send data to server if the video is playing
       if (!videoElement.paused) {
+        console.log(videoElement.currentTime);
+
         saveData(
-          e.target.valueAsNumber,
+          sliderValue,
           videoElement.currentTime,
           !videoElement.paused
         );
       }
     }
-
-    setSliderValue(e.target.valueAsNumber);
   };
 
-  const onSliderClicked = () => {
+  const startVideo = () => {
     if (videoRef.current) {
       videoRef.current.play();
     }
   };
 
-  const onVideoEnded = () => {
-    // Submit one more sample once the video finishes playing
+  const stopVideo = () => {
     if (videoRef.current) {
-      saveData(
-        sliderValue,
-        videoRef.current.currentTime,
-        false
-      );
+      videoRef.current.pause();
     }
   };
 
@@ -100,8 +98,6 @@ const Video: React.FC = () => {
               preload="auto"
               ref={videoRef}
               playbackRate={playbackRate}
-              onEnded={onVideoEnded}
-              controls
             />
 
             <div>
@@ -128,8 +124,9 @@ const Video: React.FC = () => {
               max={1}
               step={0.01}
               style={{ width: "100%" }}
-              onMouseDown={onSliderClicked}
-              onChange={throttle(onSliderChanged, 100)}
+              onMouseDown={startVideo}
+              onMouseUp={stopVideo}
+              onChange={onSliderChanged}
             />
 
             <div style={{ display: "flex", justifyContent: "space-between"}}>
