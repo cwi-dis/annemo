@@ -77,6 +77,7 @@ const Video: React.FC = () => {
     if (videoRef.current) {
       videoRef.current.play();
 
+      saveData(sliderValue, 0, false);
       intervalRef.current = window.setInterval(onTimeUpdate, 100);
     }
   };
@@ -85,6 +86,7 @@ const Video: React.FC = () => {
     if (videoRef.current) {
       videoRef.current.pause();
       clearInterval(intervalRef.current);
+      saveData(sliderValue, videoRef.current.duration, false);
     }
   };
 
