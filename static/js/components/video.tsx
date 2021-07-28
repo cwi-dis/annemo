@@ -71,6 +71,12 @@ const Video: React.FC = () => {
     setSliderValue(e.target.valueAsNumber);
   };
 
+  const onSliderClicked = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
   const onVideoEnded = () => {
     // Submit one more sample once the video finishes playing
     if (videoRef.current) {
@@ -122,6 +128,7 @@ const Video: React.FC = () => {
               max={1}
               step={0.01}
               style={{ width: "100%" }}
+              onMouseDown={onSliderClicked}
               onChange={throttle(onSliderChanged, 100)}
             />
 
