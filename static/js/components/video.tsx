@@ -32,13 +32,9 @@ const Video: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Reset slider value to zero if value of param dimension changes
-    setSliderValue(0);
-  }, [dimension]);
-
-  useEffect(() => {
-    // Reset playback rate to 1.0 every time video src or dimension changes
+    // Reset playback rate and slider every time video src or dimension changes
     setPlaybackRate(1.0);
+    setSliderValue(0);
   }, [video, dimension]);
 
   // Save the data by submitting it to the server via POST request
