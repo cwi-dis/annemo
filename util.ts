@@ -86,12 +86,14 @@ export async function loadConfig(): Promise<Config> {
  * Appends the given line to a CSV file named after the value given by the
  * variable `subject`. If the line could not be appended, an error is raised.
  *
- * @param subject Name of test subject to be used as filename
+ * @param subject Name of test subject to be used as part of filename
+ * @param subject Name of video file to be used as part of filename
+ * @param subject Name of dimension to be used as part of filename
  * @param line Line to append to the file
  */
-export async function saveToCSV(subject: string, line: string): Promise<void> {
+export async function saveToCSV(subject: string, video: string, dimension: string, line: string): Promise<void> {
   // Compute output path
-  const outputPath = path.join(__dirname, "results", `${subject}.csv`);
+  const outputPath = path.join(__dirname, "results", `${subject}_${video.split(".")[0]}_${dimension}.csv`);
 
   // Write data to file
   return await fs.writeFile(outputPath, line, {
