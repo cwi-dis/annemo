@@ -16,6 +16,7 @@ const Video: React.FC = () => {
   const { video, dimension, subject } = useParams<RouterParams>();
   // Ref for interacting with the video element
   const videoRef = useRef<HTMLVideoElement>(null);
+  const intervalRef = useRef<number>();
 
   const [ location, setLocation ] = useState<string>();
   const [ sliderValue, setSliderValue ] = useState(0);
@@ -77,12 +78,15 @@ const Video: React.FC = () => {
   const startVideo = () => {
     if (videoRef.current) {
       videoRef.current.play();
+
+      intervalRef.current = window.setInterval(onTimeUpdate, 100);
     }
   };
 
   const stopVideo = () => {
     if (videoRef.current) {
       videoRef.current.pause();
+      clearInterval(intervalRef.current);
     }
   };
 
