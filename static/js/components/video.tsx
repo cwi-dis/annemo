@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { RouterParams } from "./app";
+import useInterval from "./use_interval";
 import VideoWithRateChange from "./video_with_rate_change";
 
 /**
@@ -16,7 +17,6 @@ const Video: React.FC = () => {
   const { video, dimension, subject } = useParams<RouterParams>();
   // Ref for interacting with the video element
   const videoRef = useRef<HTMLVideoElement>(null);
-  const intervalRef = useRef<number>();
 
   const [ location, setLocation ] = useState<string>();
   const [ sliderValue, setSliderValue ] = useState(0);
@@ -36,6 +36,21 @@ const Video: React.FC = () => {
     setPlaybackRate(1.0);
     setSliderValue(0);
   }, [video, dimension]);
+
+  useInterval(() => {
+    if (videoRef.current) {
+      const videoElement = videoRef.current;
+
+      // Only send data to server if the video is playing
+      if (!videoElement.paused) {
+        saveData(
+          sliderValue,
+          videoElement.currentTime,
+          !videoElement.paused
+        );
+      }
+    }
+  }, 100);
 
   // Save the data by submitting it to the server via POST request
   const saveData = (value: number, time: number, playing: boolean) => {
@@ -58,34 +73,16 @@ const Video: React.FC = () => {
     setSliderValue(e.target.valueAsNumber);
   };
 
-  const onTimeUpdate = () => {
-    if (videoRef.current) {
-      const videoElement = videoRef.current;
-
-      // Only send data to server if the video is playing
-      if (!videoElement.paused) {
-        saveData(
-          sliderValue,
-          videoElement.currentTime,
-          !videoElement.paused
-        );
-      }
-    }
-  };
-
   const startVideo = () => {
     if (videoRef.current) {
       videoRef.current.play();
-
       saveData(sliderValue, 0, false);
-      intervalRef.current = window.setInterval(onTimeUpdate, 100);
     }
   };
 
   const stopVideo = () => {
     if (videoRef.current) {
       videoRef.current.pause();
-      clearInterval(intervalRef.current);
       saveData(sliderValue, videoRef.current.duration, false);
     }
   };
