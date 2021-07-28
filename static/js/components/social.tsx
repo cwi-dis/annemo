@@ -9,7 +9,7 @@ import { RouterParams } from "./app";
  * Renders sliders for each social dimension associated to a video
  */
 const Social: React.FC = () => {
-  const { subject } = useParams<RouterParams>();
+  const { subject, video } = useParams<RouterParams>();
 
   const [ isSaved, setIsSaved ] = useState(false);
   // Initialise each dimension to zero
@@ -37,7 +37,7 @@ const Social: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           data: dimensions,
-          subject
+          subject, video,
         })
       });
 

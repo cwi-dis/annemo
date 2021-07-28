@@ -64,8 +64,6 @@ const Video: React.FC = () => {
 
       // Only send data to server if the video is playing
       if (!videoElement.paused) {
-        console.log(videoElement.currentTime);
-
         saveData(
           sliderValue,
           videoElement.currentTime,
