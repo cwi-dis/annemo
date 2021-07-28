@@ -76,7 +76,7 @@ async function startServer(config: Config) {
     try {
       // Generate and save line to file
       const csv = formattedDate + "," + values.join(",") + "\n";
-      await saveToCSV(subject, csv);
+      await saveToCSV(subject, data.video, data.dimension, csv);
 
       // Return success
       res.send({
@@ -92,7 +92,7 @@ async function startServer(config: Config) {
 
   // Receive and save social dimension data point
   app.post("/social", async (req, res) => {
-    const { subject, data } = req.body;
+    const { subject, video, data } = req.body;
 
     // Make sure given subject exists in config. If not, return error 400
     if (!config.users.find((u) => u == subject)) {
@@ -107,7 +107,7 @@ async function startServer(config: Config) {
     try {
       // Generate and save line to file
       const csv = "Social," + values.join(",") + "\n";
-      await saveToCSV(subject, csv);
+      await saveToCSV(subject, video, "social", csv);
 
       // Return success
       res.send({
