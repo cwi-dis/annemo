@@ -21,6 +21,7 @@ const Video: React.FC = () => {
   const [ location, setLocation ] = useState<string>();
   const [ sliderValue, setSliderValue ] = useState(0);
   const [ playbackRate, setPlaybackRate ] = useState(1.0);
+  const [ videoPlaying, setVideoPlaying ] = useState(false);
 
   useEffect(() => {
     // Fetches the base URL for the video file from the server
@@ -35,8 +36,10 @@ const Video: React.FC = () => {
     // Reset playback rate and slider every time video src or dimension changes
     setPlaybackRate(1.0);
     setSliderValue(0);
-  }, [video, dimension]);
+    setVideoPlaying(false);
+  }, [video, dimension, video]);
 
+  // Schedule the callback every 100ms if video is playing
   useInterval(() => {
     if (videoRef.current) {
       const videoElement = videoRef.current;
@@ -50,7 +53,7 @@ const Video: React.FC = () => {
         );
       }
     }
-  }, 100);
+  }, (videoPlaying) ? 100 : null);
 
   // Save the data by submitting it to the server via POST request
   const saveData = (value: number, time: number, playing: boolean) => {
@@ -73,16 +76,22 @@ const Video: React.FC = () => {
     setSliderValue(e.target.valueAsNumber);
   };
 
+  // Start video playback, set `videoPlaying` state to true and save start
+  // timestamp on server
   const startVideo = () => {
     if (videoRef.current) {
       videoRef.current.play();
+      setVideoPlaying(true);
       saveData(sliderValue, 0, false);
     }
   };
 
+  // Stop video playback, set `videoPlaying` state to false and save stop
+  // timestamp on server
   const stopVideo = () => {
     if (videoRef.current) {
       videoRef.current.pause();
+      setVideoPlaying(false);
       saveData(sliderValue, videoRef.current.duration, false);
     }
   };
