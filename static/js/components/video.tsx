@@ -86,12 +86,17 @@ const Video: React.FC = () => {
     }
   };
 
-  // Stop video playback, set `videoPlaying` state to false and save stop
-  // timestamp on server
+  // Stop video playback, set `videoPlaying` state to false
   const stopVideo = () => {
     if (videoRef.current) {
       videoRef.current.pause();
       setVideoPlaying(false);
+    }
+  };
+
+  // Save timestamp for video end to server
+  const onVideoEnded = () => {
+    if (videoRef.current) {
       saveData(sliderValue, videoRef.current.duration, false);
     }
   };
@@ -108,6 +113,7 @@ const Video: React.FC = () => {
               preload="auto"
               ref={videoRef}
               playbackRate={playbackRate}
+              onEnded={onVideoEnded}
             />
 
             <div>
