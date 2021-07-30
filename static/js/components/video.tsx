@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { RouterParams } from "./app";
-import useInterval from "./use_interval";
+import useInterval from "../hooks/use_interval";
 import VideoWithRateChange from "./video_with_rate_change";
 
 /**
