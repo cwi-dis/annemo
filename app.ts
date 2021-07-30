@@ -128,12 +128,14 @@ async function startServer(config: Config) {
     });
   });
 
+  // Render view listing result files
   app.get("/download", async (req, res) => {
     res.render("download", {
       files: await getResultFiles()
     });
   });
 
+  // Offer file named by :fname as download
   app.get("/download/:fname", (req, res) => {
     const { fname } = req.params;
 
@@ -142,6 +144,7 @@ async function startServer(config: Config) {
     );
   });
 
+  // Delete result file identified by :fname and redirect to /download
   app.post("/download/:fname/delete", async (req, res) => {
     const { fname } = req.params;
     await deleteResultFile(fname);
