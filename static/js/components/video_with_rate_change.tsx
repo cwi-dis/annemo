@@ -1,6 +1,8 @@
 import * as React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import omit from "lodash.omit";
+
+import useForwardedRef from "../hooks/use_forwarded_ref";
 
 type VideoProps = JSX.IntrinsicElements["video"];
 
@@ -10,17 +12,7 @@ interface VideoWithRateChangeProps extends VideoProps {
 
 const VideoWithRateChange: React.ForwardRefRenderFunction<HTMLVideoElement, VideoWithRateChangeProps> = (props, ref) => {
   const { playbackRate } = props;
-  const innerRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (ref) {
-      if (typeof ref == "object") {
-        ref.current = innerRef.current;
-      } else {
-        ref(innerRef.current);
-      }
-    }
-  }, []);
+  const innerRef = useForwardedRef(ref);
 
   useEffect(() => {
     if (innerRef.current) {
