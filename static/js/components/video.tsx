@@ -8,9 +8,8 @@ import VideoWithRateChange from "./video_with_rate_change";
 
 /**
  * Renders a video element alongside a slider for annotating either arousal or
- * valence. The slider values are submitted to the server via POST request on
- * change. A throttling function makes sure a value is submitted at most every
- * 100ms to avoid chocking the server.
+ * valence. Video playback is started if the slider's scrubber is held down and
+ * during this, a new data value is submitted to the server every 100ms.
  */
 const Video: React.FC = () => {
   // Get video name, subject name and dimension from routing params
