@@ -1,10 +1,10 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
 import { capitalize } from "../util";
 import { RouterParams } from "./app";
+import useVideoList from "../hooks/use_video_list";
 
 /**
  * Renders the application's sidebar, which contains links to all the videos
@@ -13,18 +13,7 @@ import { RouterParams } from "./app";
 const Sidebar: React.FC = () => {
   const location = useLocation();
   const { subject } = useParams<RouterParams>();
-
-  const [ videos, setVideos ] = useState<Array<string>>([]);
-
-  useEffect(() => {
-    // Fetch list of videos from the server, passing subject name along with
-    // the request. If the subject name is not valid, an empty list is returned.
-    fetch(`/videos?subject=${subject}`).then((res) => {
-      return res.json();
-    }).then((data) => {
-      setVideos(data.videos);
-    });
-  }, []);
+  const videos = useVideoList(subject);
 
   return (
     <div className="column is-3">
