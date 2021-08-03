@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
-import NotFound from "./not_found";
 
+import NotFound from "./not_found";
 import Sidebar from "./sidebar";
 import Social from "./social";
 import Start from "./start";

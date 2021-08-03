@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { RouterParams } from "./app";
 import useInterval from "../hooks/use_interval";
 import VideoWithRateChange from "./video_with_rate_change";
+import useBaseUrl from "../hooks/use_base_url";
 
 /**
  * Renders a video element alongside a slider for annotating either arousal or
@@ -16,20 +17,11 @@ const Video: React.FC = () => {
   const { video, dimension, subject } = useParams<RouterParams>();
   // Ref for interacting with the video element
   const videoRef = useRef<HTMLVideoElement>(null);
+  const location = useBaseUrl();
 
-  const [ location, setLocation ] = useState<string>();
   const [ sliderValue, setSliderValue ] = useState(0);
   const [ playbackRate, setPlaybackRate ] = useState(1.0);
   const [ sliderHeldDown, setSliderHeldDown ] = useState(false);
-
-  useEffect(() => {
-    // Fetches the base URL for the video file from the server
-    fetch("/location").then((res) => {
-      return res.json();
-    }).then((data) => {
-      setLocation(data.location);
-    });
-  }, []);
 
   useEffect(() => {
     // Reset playback rate and slider every time video src or dimension changes
