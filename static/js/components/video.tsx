@@ -28,7 +28,7 @@ const Video: React.FC = () => {
     setPlaybackRate(1.0);
     setSliderValue(0);
     setSliderHeldDown(false);
-  }, [video, dimension, video]);
+  }, [video, dimension]);
 
   // Schedule the callback every 100ms if video is playing
   useInterval(() => {
