@@ -1,11 +1,9 @@
 import * as React from "react";
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
 
+import Content from "./content";
 import NotFound from "./not_found";
 import Sidebar from "./sidebar";
-import Social from "./social";
-import Start from "./start";
-import Video from "./video";
 
 /**
  * Elements which may be present in router params
@@ -27,17 +25,7 @@ const App: React.FC = () => {
         <Switch>
           <Route path="/user/:subject">
             <Sidebar />
-            <Switch>
-              <Route path="/user/:subject/video/:video/:dimension">
-                <Video />
-              </Route>
-              <Route path="/user/:subject/social/:video">
-                <Social />
-              </Route>
-              <Route path="/">
-                <Start />
-              </Route>
-            </Switch>
+            <Content />
           </Route>
           <Route path="/">
             <NotFound />
